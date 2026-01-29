@@ -1,0 +1,25 @@
+void managePower(int batteryPct, int temperature, int lowSignalLoad) {
+ 
+    /* Smart power saving */
+    if (lowSignalLoad && batteryPct < 40) {
+        enablePowerSavingMode();
+    }
+ 
+    /* Low power alert */
+    if (batteryPct <= 20) {
+        sendAlert("LOW POWER WARNING");
+    }
+ 
+    /* Prevent thermal shutdown */
+    if (temperature >= 75) {
+        reduceSystemLoad();
+    }
+ 
+    /* Safe failover – no sudden shutdown */
+    if (batteryPct <= 10) {
+        activateFailover();
+    }
+ 
+    /* Log power data */
+    logPower(batteryPct, temperature);
+}
